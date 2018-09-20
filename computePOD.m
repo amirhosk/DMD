@@ -1,7 +1,7 @@
-%%Start
+%%Startfff
 
 clear all, close all, clc
-load ../DATA/FLUIDS/CYLINDER_ALL.mat
+load CYLINDER_ALL.mat
 X = VORTALL;
 Y = [X X];
 
