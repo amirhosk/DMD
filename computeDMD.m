@@ -2,7 +2,7 @@
 %%%Start
 
 clear all, close all, clc
-load ../DATA/FLUIDS/CYLINDER_ALL.mat
+load CYLINDER_ALL.mat
 X = VORTALL(:,1:end-1);
 X2 = VORTALL(:,2:end);
 [U,S,V] = svd(X,'econ');

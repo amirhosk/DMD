@@ -1,4 +1,4 @@
-%%Startfff
+%%Start
 
 clear all, close all, clc
 load CYLINDER_ALL.mat
