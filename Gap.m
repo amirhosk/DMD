@@ -3,20 +3,20 @@
 clear;clc
 
 
-tF=10;    %Final time
-t = 0:1/100:tF-1/100;                     % Time vector
+tF=100;    %Final time
+Fs=5;
+t = 0:1/Fs:tF-1/Fs;                     % Time vector
 L=length(t);
-Fs=100;
 
-f1=0;   %%Initial frequency
-f2=100;   %%Final frequency
+f1=.1;   %%Initial frequency
+f2=Fs;   %%Final frequency
 
 %x = sin(2*pi*15*t) + sin(2*pi*40*t);      % Signal
 x = sin(2*pi*(1/2*(f2-f1)/tF.*t+f1).*t);
 
 s = tf('s');
 G1 = s/(s^2 + 2*s + 10);
-G2 = s/(s^2 + 3*s + 5);
+G2 = 1/(s + 1);
 
 out1=lsim(G1,x,t)
 
@@ -29,23 +29,24 @@ y1(m1<1e-6) = 0;
 p1 = unwrap(angle(y1));                     % Phase
 
 y2 = fft(out2);                             % Compute DFT of system 2
-P2 = abs(y2/L);
-P1 = P2(1:L/2+1);
-P1(2:end-1) = 2*P1(2:end-1);
+%P2 = abs(y2/L);
+%P1 = P2(1:L/2+1);
+%P1(2:end-1) = 2*P1(2:end-1);
 
 m2 = abs(y2);                               % Magnitude
 y2(m2<1e-6) = 0;
 p2 = unwrap(angle(y2));                     % Phase
 
 
-f = Fs*(0:(L/2))/L;
+%f = Fs*(0:(L/2))/L;
 
-%f = (0:length(y1)-1)*100/length(y1);        % Frequency vector
+f = (0:L-1)*Fs/L;        % Frequency vector
+f=f(1:end/2);
 
 %plot(f,mag2db(m1))
 title('Magnitude')
 hold on
-plot(f,mag2db(P1))
+scatter(f,mag2db(1/Fs.*m2(1:end/2)))
 
 
 [mag,phase,wout] = bode(G2,f);
