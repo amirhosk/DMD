@@ -6,7 +6,8 @@ xvel=xvel';
 yvel=yvel';
 
 VEL=[xvel;yvel];
-vel=VEL(:,1:90);
+count=100;
+vel=VEL(:,1:count);
 
 X = vel(:,1:end-1);
 X2 = vel(:,2:end);
@@ -42,15 +43,22 @@ t=0:1:129;
 %lambda = diag(eigs);
 %omega = log(lambda)/dt;
 x1 = X(:, 1);
-%b = Phi\x1;
+b = Phi\x1;
 
  X_dmd = zeros(2400,130);
  X_dmd(:,1)=x1;
 for iter = 2:130
-    X_dmd(:,iter) = Phi*eigs^(iter-1)*Phi'*x1;
+    X_dmd(:,iter) = Phi*eigs^(iter-1)*b;
 end
 
 
+subplot(2,1,1)
 hold on
-plot(t,VEL(1,:),'r--',t,X_dmd(1,:),'k')
+plot(t,VEL(435,:),'r--',t,X_dmd(435,:),'k')
+plot([t(count-1);t(count-1)],[min(VEL(435,:));max(X_dmd(435,:))])
+
+subplot(2,1,2)
+hold on
+plot(t,VEL(1200+435,:),'r--',t,X_dmd(1200+435,:),'k')
+plot([t(count-1);t(count-1)],[min(VEL(1200+435,:));max(X_dmd(1200+435,:))])
 

@@ -15,7 +15,7 @@ f2=Fs;   %%Final frequency
 x = sin(2*pi*(1/2*(f2-f1)/tF.*t+f1).*t);
 
 s = tf('s');
-G2 = 1/(s+ 1);
+G2 = 1/(s^2+3*s+ 1);
 
 out2=lsim(G2,x,t);
 
