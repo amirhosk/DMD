@@ -1,5 +1,4 @@
 close all, clc
-%jagjcgzjc
 CFD_data
 xvel(isnan(xvel))=0;
 yvel(isnan(yvel))=0;
