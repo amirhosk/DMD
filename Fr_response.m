@@ -8,14 +8,14 @@ Fs=5;
 t = 0:1/Fs:tF-1/Fs;                     % Time vector
 L=length(t);
 
-f1=.1;   %%Initial frequency
+f1=.01;   %%Initial frequency
 f2=Fs;   %%Final frequency
 
 %x = sin(2*pi*15*t) + sin(2*pi*40*t);      % Signal
 x = sin(2*pi*(1/2*(f2-f1)/tF.*t+f1).*t);
 
 s = tf('s');
-G2 = 1/(s^3+2*s^2+2*s + 1);
+G2 = 1/(s+ 1);
 
 out2=lsim(G2,x,t);
 
@@ -44,12 +44,12 @@ G=2*G;
 %plot(f,mag2db(m1))
 title('Magnitude')
 hold on
-scatter(f,mag2db(G))
+scatter(log10(f),mag2db(G))
 
 
 [mag,phase,wout] = bode(G2,f);
 mag=reshape(mag,[],1);
-plot(f,mag2db(mag))
+plot(log10(f),mag2db(mag))
 
 
 
