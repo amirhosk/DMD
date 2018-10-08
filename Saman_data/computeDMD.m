@@ -6,7 +6,7 @@ xvel=xvel';
 yvel=yvel';
 
 VEL=[xvel;yvel];
-count=100;
+count=130;
 vel=VEL(:,1:count);
 
 X = vel(:,1:end-1);
@@ -62,3 +62,5 @@ hold on
 plot(t,VEL(1200+435,:),'r--',t,X_dmd(1200+435,:),'k')
 plot([t(count-1);t(count-1)],[min(VEL(1200+435,:));max(X_dmd(1200+435,:))])
 
+
+CFD_data
